@@ -13,7 +13,7 @@ Chat Ai-nimal permette di interagire con un animale virtuale intelligente tramit
 
 ## Requisiti
 - Python 3.8 o superiore
-- (Eventuali librerie aggiuntive vanno specificate qui)
+- Libreria openai
 
 ## Come configurare la OpenAI API Key
 Per poter utilizzare Chat Ai-nimal è necessario inserire una chiave API di OpenAI. Segui questi passaggi:
