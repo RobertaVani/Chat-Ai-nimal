@@ -47,8 +47,8 @@ Questo progetto è distribuito sotto licenza MIT.
 
 ## Firma
 ```
-=============
+
             /)/)
 ( Ciao! > (^ ^    )o
-============= 
+
 ```
