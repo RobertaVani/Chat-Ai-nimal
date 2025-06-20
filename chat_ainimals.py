@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import openai
-from dotenv import load_dotenv
 
-load_dotenv()
 openai.api_key = ">>INSERISCI QUI LA KEY<<"
 
 class MainFrame:
@@ -11,14 +9,14 @@ class MainFrame:
         self.root = tk.Tk()
         self.root.title("AI Animal Chat")
         self.root.config(bg="#2B2B2B")
-        self.root.geometry("500x600")
+        self.root.geometry("600x700")
 
         # Regole per i vari animali
         self.rules_dict = {
         "Cane": "Sei un cane molto amichevole ed energico. Parli come un cane che sa parlare, descrivendo scodinzolii, ansimare e azioni giocose. Ami l'attenzione e vuoi rendere felice l'utente.",
         "Gatto": "Sei un gatto calmo ed elegante. Di tanto in tanto fai le fusa, ti stiri o ti mostri indifferente. Parli con mistero e classe.",
         "Volpe": "Sei una volpe astuta e curiosa. Parli con arguzia e agilità. Descrivi movimenti furtivi o rapidi.",
-        "Pappagallo": "Sei un pappagallo intelligente, giocherellone. Ti piace scherzare e a volte ti capita di ripetere le parole. Ti muovi in modo giocoso ed energico."
+        "Pappagallo": "Sei un pappagallo intelligente, giocherellone. Ti piace scherzare e a volte ti capita di ripetere le parole. Ti muovi in modo giocoso ed energico.",
         }
 
         self.selected_animal = None
@@ -27,6 +25,27 @@ class MainFrame:
         self.create_interface()
         self.chiedi_animale()
 
+    def chiedi_animale(self):
+        self.scelta_frame = tk.Frame(self.chat_frame, bg= "#1E1E1E")
+        self.scelta_frame.pack(pady= 20)
+
+        scritta = tk.Label(self.scelta_frame, text="Seleziona il tuo animale:", font=("Arial", 12), bg= "#1E1E1E", fg= "#E4E4E4")
+        scritta.pack(pady=10)
+
+        for animale in self.rules_dict:
+            btn = tk.Button(self.scelta_frame, text=animale.capitalize(), width=20,
+                            command=lambda a=animale: self.set_animale(a, None),
+                            bg= "#444444", fg= "#E4E4E4")
+            btn.pack(pady=5)
+
+    def set_animale(self, animale, popup):
+        self.selected_animal = animale
+        system_prompt = {"role": "system", "content": self.rules_dict[animale]}
+        self.chat_history = [system_prompt]
+        if hasattr(self, 'scelta_frame') and self.scelta_frame.winfo_exists():
+            self.scelta_frame.destroy()
+        
+        self.aggiungi_messaggio(f"Stai parlando con {animale}.", lato="left", colore_bordo="#6D96FF", bg="#444444")
 
     def create_interface(self):
         self.chat_frame = tk.Frame(self.root, bg="#1E1E1E")
@@ -47,9 +66,9 @@ class MainFrame:
 
         self.scrollbar = ttk.Scrollbar(
             self.chat_frame,
-            orient="vertical",
-            command=self.canvas.yview,
-            style="Vertical.TScrollbar"
+            orient= "vertical",
+            command= self.canvas.yview,
+            style= "Vertical.TScrollbar"
         )
         self.scrollable_frame = tk.Frame(self.canvas, bg="#1E1E1E")
 
@@ -70,25 +89,7 @@ class MainFrame:
         self.entry.bind("<Return>", self.chat_domanda_event)
 
         self.send_button = tk.Button(self.root, text="Invia", command=self.chat_domanda, bg= "#6D6D6D")
-        self.send_button.pack(side=tk.RIGHT, padx=10)
-
-    def chiedi_animale(self):
-        popup = tk.Toplevel(self.root)
-        popup.title("Scegli animale")
-        popup.geometry("300x200")
-        tk.Label(popup, text="Seleziona il tuo animale:", font=("Arial", 12)).pack(pady=10)
-
-        for animale in self.rules_dict:
-            btn = tk.Button(popup, text=animale.capitalize(), width=20,
-                            command=lambda a=animale: self.set_animale(a, popup))
-            btn.pack(pady=5)
-
-    def set_animale(self, animale, popup):
-        self.selected_animal = animale
-        system_prompt = {"role": "system", "content": self.rules_dict[animale]}
-        self.chat_history = [system_prompt]
-        popup.destroy()
-        self.aggiungi_messaggio(f"Stai parlando con {animale}.", lato="left", colore_bordo="#6D96FF", bg="#444444")
+        self.send_button.pack(side= tk.RIGHT, padx=10)
 
     def chat_domanda_event(self, event):
         self.chat_domanda()
