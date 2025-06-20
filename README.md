@@ -15,6 +15,21 @@ Chat Ai-nimal permette di interagire con un animale virtuale intelligente tramit
 - Python 3.8 o superiore
 - (Eventuali librerie aggiuntive vanno specificate qui)
 
+## Come configurare la OpenAI API Key
+Per poter utilizzare Chat Ai-nimal è necessario inserire una chiave API di OpenAI. Segui questi passaggi:
+
+1. Ottieni una API Key dal sito di [OpenAI](https://platform.openai.com/account/api-keys).
+2. Apri il file `RV_AiPets.py`.
+3. Sostituisci la stringa `">>INSERISCI QUI LA KEY<<"` con la tua API Key personale, ad esempio:
+   ```python
+   openai.api_key = ">>INSERISCI QUI LA KEY<<"
+   ```
+   oppure, se preferisci, puoi inserire direttamente la chiave:
+   ```python
+   openai.api_key = "sk-..."
+   ```
+4. Salva il file e avvia il programma normalmente.
+
 ## Installazione
 1. Clona la repository:
    ```bash
@@ -45,7 +60,7 @@ Questo progetto è distribuito sotto licenza MIT.
 
 ---
 
-## Firma
+## Grazie per l'attenzione!
 ```
 
             /)/)
