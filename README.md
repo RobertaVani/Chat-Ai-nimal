@@ -58,8 +58,6 @@ Contributi, suggerimenti e idee sono benvenuti! Sentiti libero di aprire una iss
 ## Licenza
 Questo progetto è distribuito sotto licenza MIT.
 
----
-
 ## Grazie per l'attenzione!
 ```
 
